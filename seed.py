@@ -1,9 +1,17 @@
 import model
 import csv
+from sqlalchemy.orm import sessionmaker
+
+# make sure you're in (env) first!!
+# >>> # python -i seed.py
+# >>> session = model.connect()
+# >>> load_users(session)
 
 def load_users(session):
-    # use u.user
-    pass
+    with open('seed_data/u.usertest', 'rb') as csvfile:
+        reader = csv.reader(csvfile, delimiter='|')
+        for row in reader:
+            print row  
 
 def load_movies(session):
     # use u.item
@@ -20,3 +28,4 @@ def main(session):
 if __name__ == "__main__":
     s= model.connect()
     main(s)
+ 
