@@ -6,6 +6,11 @@ from sqlalchemy.orm import sessionmaker
 ENGINE = None
 Session = None
 
+# to test:
+# >>> python -i seed.py
+# >>> session = model.connect()
+# >>> load_users(session)
+
 Base = declarative_base()
 
 def connect():

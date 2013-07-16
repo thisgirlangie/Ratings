@@ -8,10 +8,15 @@ from sqlalchemy.orm import sessionmaker
 # >>> load_users(session)
 
 def load_users(session):
-    with open('seed_data/u.usertest', 'rb') as csvfile:
+    with open('seed_data/u.user', 'rb') as csvfile:
         reader = csv.reader(csvfile, delimiter='|')
         for row in reader:
-            print row  
+            id = row[0]
+            age = row[1]
+            zipcode = row[4]
+            u = model.User(id=id, age=age, zipcode=zipcode)
+            session.add(u)
+        session.commit()
 
 def load_movies(session):
     # use u.item
@@ -23,7 +28,7 @@ def load_ratings(session):
 
 def main(session):
     # You'll call each of the load_* functions with the session as an argument
-    pass
+    load_users(session) # comment this out when you have loaded the users
 
 if __name__ == "__main__":
     s= model.connect()
