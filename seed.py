@@ -36,13 +36,21 @@ def load_movies(session):
         session.commit()
 
 def load_ratings(session):
-    # use u.data
-    pass
+    with open('seed_data/u.data', 'rb') as csvfile:
+        reader = csv.reader(csvfile, delimiter='\t')
+        for row in reader:
+            user_id = row[0]
+            movie_id = row[1]
+            rating = row[2]
+            u = model.Rating(user_id=user_id, movie_id=movie_id, rating=rating)
+            session.add(u)
+        session.commit()
 
 def main(session):
     # You'll call each of the load_* functions with the session as an argument
-    # load_users(session) # comment this out when you have loaded the users
-    load_movies(session) # comment this out when you have loaded the movies
+    # load_users(session) # comment this out when seed users have been loaded
+    # load_movies(session) # comment this out when seed movies have been loaded
+    # load_ratings(session) # comment this out when seed ratings have been loaded
 
 if __name__ == "__main__":
     s= model.connect()
