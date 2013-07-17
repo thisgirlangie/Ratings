@@ -27,6 +27,7 @@ class User(Base):
     password = Column(String(64), nullable=True)
     age = Column(Integer, nullable=True)
     zipcode = Column(String(15), nullable=True)
+    
 
 class Movie(Base):
     __tablename__ = "movies"
