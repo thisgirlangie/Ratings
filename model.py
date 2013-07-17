@@ -1,10 +1,12 @@
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
 from sqlalchemy import Column, Integer, String, DateTime
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy import ForeignKey
+from sqlalchemy.orm import sessionmaker, scoped_session
+from sqlalchemy.orm import backref, relationship
 
-ENGINE = None
-Session = None
+engine = create_engine("sqlite:///ratings.db", echo=False)
+session = scoped_session(sessionmaker(bind=engine, autocommit = False, autoflush = False))
 
 # to test:
 # >>> python -i seed.py
@@ -12,19 +14,10 @@ Session = None
 # >>> load_users(session)
 
 Base = declarative_base()
-
-def connect():
-    global ENGINE
-    global Session
-
-    ENGINE = create_engine("sqlite:///ratings.db", echo=True)
-    Session = sessionmaker(bind=ENGINE)
-
-    return Session()
+Base.query = session.query_property()
 
 def main():
-    """In case we need this for something"""
-    pass
+    global session
 
 class User(Base):
     __tablename__ = "users"
@@ -48,8 +41,9 @@ class Rating(Base):
 
     id = Column(Integer, primary_key=True)  
     movie_id = Column(Integer, nullable=True)
-    user_id = Column(Integer, nullable=True)
+    user_id = Column(Integer, ForeignKey('users.id')) #ForeignKey('table.column_name')
     rating = Column(Integer, nullable=True)
+    user = relationship("User", backref=backref("ratings", order_by=id))
 
 
 if __name__ == "__main__":
