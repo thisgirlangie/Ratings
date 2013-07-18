@@ -5,8 +5,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    user_list = model.session.query(model.User).limit(5).all()
-    print user_list
+    user_list = session.query(User).limit(15).all()
     return render_template("user_list.html", users=user_list)
 
 # ADD USER
@@ -25,6 +24,12 @@ def add_user_create():
     session.add(u)
     session.commit()
     return "Succesfully added user!"
+
+@app.route("/view_users")
+def view_users():
+    user_list = session.query(User).limit(5).all() # wrong
+    print user_list #wrong
+
 
 if __name__ == "__main__":
     app.run(debug = True)
