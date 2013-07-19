@@ -1,7 +1,10 @@
 import model
 import csv
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
+
+Base = declarative_base()
 
 # make sure you're in (env) first!!
 # >>> # python -i seed.py
@@ -53,6 +56,5 @@ def main(session):
     # load_ratings(session) # comment this out when seed ratings have been loaded
 
 if __name__ == "__main__":
-    s= model.connect()
+    s = model.connect()
     main(s)
- 

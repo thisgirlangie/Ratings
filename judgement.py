@@ -8,6 +8,22 @@ def index():
     user_list = session.query(User).limit(15).all()
     return render_template("user_list.html", users=user_list)
 
+# SHOW RATINGS FOR A USER
+
+@app.route("/user_ratings")
+def user_ratings():
+    user_id = request.args.get("id")
+    user = session.query(User).get(user_id)
+    return render_template("user_ratings.html", user=user)
+
+# SHOW USERS AND RATINGS
+
+@app.route("/rating")
+def user_ratings():
+    user_list = session.query(User).limit(15).all()
+    html = render_template("user_ratings.html", ratings=ratings)
+    return html
+
 # ADD USER
 @app.route("/add_user")
 def display_add_user_form():
