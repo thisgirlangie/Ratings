@@ -18,11 +18,12 @@ def user_ratings():
 
 # SHOW USERS AND RATINGS
 
-@app.route("/rating")
-def user_ratings():
-    user_list = session.query(User).limit(15).all()
-    html = render_template("user_ratings.html", ratings=ratings)
-    return html
+# @app.route("/rating")
+#def user_ratings():
+#    user_list = session.query(User).limit(15).all()
+#    user = session.query(User).get(user_id)
+#    html = render_template("user_ratings.html", ratings=ratings)
+#    return html
 
 # ADD USER
 @app.route("/add_user")

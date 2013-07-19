@@ -2,7 +2,7 @@
 <body>
     <h1>User: {{ user.id}}</h1>
 {% for rating in user.ratings %}
-<h2>Rating of {{ rating.rating }} for {{ rating.movie.name }}.</h2>
+<h2>Rating of {{ rating.rating }} for {{ rating.movie_id }}.</h2>
 {% endfor %}
 </body>
 </html>
