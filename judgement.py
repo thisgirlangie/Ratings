@@ -16,15 +16,6 @@ def user_ratings():
     user = session.query(User).get(user_id)
     return render_template("user_ratings.html", user=user)
 
-# SHOW USERS AND RATINGS
-
-# @app.route("/rating")
-#def user_ratings():
-#    user_list = session.query(User).limit(15).all()
-#    user = session.query(User).get(user_id)
-#    html = render_template("user_ratings.html", ratings=ratings)
-#    return html
-
 # ADD USER
 @app.route("/add_user")
 def display_add_user_form():
