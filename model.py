@@ -54,7 +54,7 @@ class Movie(Base):
     released_at = Column(DateTime, nullable=True)
     imdb_url = Column(String(140), nullable=True)
 
-    ratings = relationship("Rating", backref=backref("movies", order_by=id))
+    ratings = relationship("Rating", backref=backref("movie", order_by=id))
 
 class Rating(Base):
     __tablename__ = "ratings"
